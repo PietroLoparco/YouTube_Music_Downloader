@@ -25,28 +25,13 @@ def Converter(Videomp4):
 
 T: List[Thread] = []
 T1: List[Thread] = []
-url: List[str] = [
-    'https://www.youtube.com/',
-    'https://www.youtube.com/',
-    'https://www.youtube.com/',
-    'https://www.youtube.com/',
-    'https://www.youtube.com/',
-    'https://www.youtube.com/',
-    'https://www.youtube.com/',
-    'https://www.youtube.com/',
-    'https://www.youtube.com/',
-    'https://www.youtube.com/',
-    'https://www.youtube.com/',
-    'https://www.youtube.com/',
-    'https://www.youtube.com/',
-    'https://www.youtube.com/'
-]
+YOUTUBE_URL: List[str] = open(r'list.txt', 'r').read().splitlines()
 
 print("--------------------------------------")
 print("Start: " + ctime())
 print("--------------------------------------")
 
-for i, link in enumerate(url, 1):
+for i, link in enumerate(YOUTUBE_URL, 1):
     T.append(Thread(target=DownloaderVideo, args=[link]))
     T[i-1].start()
 
