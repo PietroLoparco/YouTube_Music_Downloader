@@ -9,10 +9,11 @@ from moviepy.editor import VideoFileClip
 PATH: str = '~\Musica'
 
 def DownloaderVideo(link):
-    yt: YouTube = YouTube(link)
-    stream: stream = yt.streams.get_lowest_resolution()
-    stream.download(PATH)
-    print("downloaded")
+    if link.startswith("h"):
+        yt: YouTube= YouTube(link)
+        stream = yt.streams.get_lowest_resolution()
+        stream.download(PATH)
+        print("downloaded")
 
 
 def Converter(Videomp4):
@@ -23,8 +24,9 @@ def Converter(Videomp4):
     video.close()
     remove(join(PATH, Videomp4))
 
-T: List[Thread] = []
+T:  List[Thread] = []
 T1: List[Thread] = []
+LPath: List[str] = []
 YOUTUBE_URL: List[str] = open(r'list.txt', 'r').read().splitlines()
 
 print("--------------------------------------")
@@ -38,10 +40,13 @@ for i, link in enumerate(YOUTUBE_URL, 1):
 for t in T:
     t.join()
 
-for j, Video in enumerate(listdir(PATH), 1):
-    if Video.endswith(".mp4"):
-        T1.append(Thread(target=Converter, args=[Video]))
-        T1[j-1].start()
+for i in listdir(PATH):
+    if i.endswith(".mp4"):
+        LPath.append(i)
+
+for j, Video in enumerate(LPath, 1):
+    T1.append(Thread(target=Converter, args=[Video]))
+    T1[j-1].start()
 
 for t1 in T1:
     t1.join()
