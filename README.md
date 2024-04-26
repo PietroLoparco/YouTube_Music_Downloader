@@ -6,6 +6,7 @@ it is a simple program that downloads the video from youtube and then converts i
 * install python
 * install correct library with pip
 * create your own list.txt file where you put the links to download, and replace the PATH variable.
+* (The link format must be: https://youtu.be/..., it is very important that the link begins with http/https otherwise it may not work)
 
 ## Now compile and run
  
